@@ -42,19 +42,32 @@
 
       const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
       const { data } = imageData;
+      const tMod = Math.floor(t / 100);
 
       brightPixels.forEach(p => {
         const i = p / 4;
         const x = i % canvas.width;
         const y = (i / canvas.height) >>> 0;
 
-        const r = 64 + (128 * x) / canvas.width + 64 * Math.sin(t / 1000);
-        const g = 64 + (128 * y) / canvas.height + 64 * Math.cos(t / 1000);
-        const b = 128;
 
-        data[p + 0] = r;
-        data[p + 1] = g;
-        data[p + 2] = b;
+        let neighbourLeft = p - 4*tMod;
+        let neighbourRight = p + 4*tMod;
+        let neighbourTop = p - (canvas.width * 4);
+        let neighbourBottom = p + (canvas.width * 4);
+
+        // const r = 64 + (128 * x) / canvas.width + 64 * Math.sin(t / 1000);
+        // const g = 64 + (128 * y) / canvas.height + 64 * Math.cos(t / 1000);
+        // const b = 128;
+
+        // data[p + 0] = r;
+        // data[p + 1] = g;
+        // data[p + 2] = b;
+        data[neighbourLeft + 0] = data[p + 0]; // Make left pixel R the same as p
+        data[neighbourRight + 1] = data[p + 1]; // Make right pixel G the same as p
+        data[neighbourBottom + 2] = data[p + 2]; // Make Bottome pixel B the same as p
+        data[neighbourTop + 2] = data[p + 2]; // Make Top pixel B the same as p
+        // data[p + 1] = g;
+        // data[p + 2] = b;
       });
 
       ctx.putImageData(imageData, 0, 0);
