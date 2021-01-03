@@ -1,27 +1,47 @@
 <script>
-    import Photo from './components/Photo.svelte';
-    import Svg from './components/Svg.svelte';
-    // import Canvas from './components/Canvas.svelte';
+  import Router from 'svelte-spa-router';
+  import {fade} from 'svelte/transition'
+  import Menu from './components/Menu.svelte';
+  import Home from './routes/Home.svelte';
+  import Day1 from './routes/Day1.svelte';
 
-    import imageUrl from './img/metro-steps_1000.jpg';
+  let showMenu = false;
+
+  const routes = {
+    '/': Home,
+    '/1': Day1,
+  };
+
+  const toggleMenu = () => showMenu = !showMenu;
+
 </script>
 
 <style>
-  .app {
-      background: yellow;
-  }
-  .container {
+  .app>main {
+    background: rgb(209, 209, 167);
+    margin: 1rem;
+    padding: 1rem;
+    min-height: calc(100vh - 2rem);
+    display: grid;
+    place-content: center;
     position: relative;
+  }
+  .menu-link {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
   }
 </style>
 
 <div class="app">
-  <header>
-    <h1>Hi</h1>
-  </header>
-  <main class="container">
-    <Photo src={imageUrl} />
-    <Svg />
-    <!-- <Canvas /> -->
+  <main>
+    <Router {routes} restoreScrollState={true}/>
   </main>
+  {#if showMenu}
+    <div transition:fade>
+      <Menu linkClick={toggleMenu}/>
+    </div>
+  {/if}
+  <button class="menu-link" on:click={toggleMenu}>{showMenu ? 'Close' : 'Show'} Menu</button>
 </div>
