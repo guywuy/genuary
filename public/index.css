@@ -1,3 +1,6 @@
+:root {
+  --primary: #600068;
+}
 html {
   scroll-behavior: smooth;
 }
@@ -9,4 +12,16 @@ body {
   background: #fff;
   margin: 0;
   padding: 0;
+}
+.btn {
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  background: transparent;
+  padding: 0.25rem;
+}
+.bg-white {
+  background: white;
+}
+.mg-btm {
+  margin-bottom: 1rem;
 }

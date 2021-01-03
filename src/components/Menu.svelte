@@ -11,7 +11,11 @@
     {
       route: "/1",
       desc: "1 - Triple Nested Loops"
-    }
+    },
+    {
+      route: "/2",
+      desc: "2 - Rule 30"
+    },
   ];
 </script>
 
@@ -29,6 +33,11 @@
     top: 0;
     left: 0;
     width: 100%;
+  }
+  ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
   }
   li {
     margin-bottom: 1rem;

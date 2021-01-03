@@ -4,12 +4,14 @@
   import Menu from './components/Menu.svelte';
   import Home from './routes/Home.svelte';
   import Day1 from './routes/Day1.svelte';
+  import Day2 from './routes/Day2.svelte';
 
   let showMenu = false;
 
   const routes = {
     '/': Home,
     '/1': Day1,
+    '/2': Day2,
   };
 
   const toggleMenu = () => showMenu = !showMenu;
@@ -26,7 +28,7 @@
     place-content: center;
     position: relative;
   }
-  .menu-link {
+  .menu-button {
     position: fixed;
     top: 0;
     left: 0;
@@ -43,5 +45,5 @@
       <Menu linkClick={toggleMenu}/>
     </div>
   {/if}
-  <button class="menu-link" on:click={toggleMenu}>{showMenu ? 'Close' : 'Show'} Menu</button>
+  <button class="menu-button btn bg-white" on:click={toggleMenu}>{showMenu ? 'Close' : 'Show'} Menu</button>
 </div>
