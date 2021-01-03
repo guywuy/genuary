@@ -39,10 +39,21 @@
   }
 
   const nextIteration = () => {
+    // Copy current iteration to new array
     let currentIterationCopy = cells[iteration].map(cell => new Cell(cell.index, cell.alive));
-    cells[iteration + 1] = currentIterationCopy;
-    cells[iteration + 1].forEach(cell => cell.evolve());
+    cells[iteration + 1] = evolveCells(currentIterationCopy);
+    console.log(cells);
     iteration++;
+  }
+
+  const evolveCells = (cellArray) => {
+    cellArray.forEach(cell => cell.evolve());
+    return cellArray;
+  }
+
+  const handleCellClick = (i, x) => {
+    cells[i][x].alive = !cells[i][x].alive;
+    iteration = i;
   }
 </script>
 
@@ -56,9 +67,9 @@
 <button on:click={nextIteration} class="btn bg-white mg-btm">Next</button>
 
 <svg viewbox={`0 0 ${numCells*10} ${iteration > numCells ? iteration*10 : numCells*10}`} width={1100} preserveAspectRatio="xMidYMid meet">
-{#each cells as iteration, i}
-  {#each iteration as cell}
-    <rect x={cell.index*10} y={i*10} width={10} height={10} fill={cell.alive ? 'white' : 'black'}/>
+{#each cells as generation, i}
+  {#each generation as cell}
+    <rect x={cell.index*10} y={i*10} width={10} height={10} opacity={iteration < i ? '0.6' : '1'} fill={cell.alive ? 'white' : 'black'} on:click={() => handleCellClick(i, cell.index)}/>
   {/each}
 {/each}
 </svg>
