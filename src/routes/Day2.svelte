@@ -1,61 +1,35 @@
 <script>
   // https://en.wikipedia.org/wiki/Rule_30
 
-  // Rewrite to binary arrays instead of class objects, 1 for alive. Use bitwise operators to compare for next state.
-  // ^ XOR, | OR. 
-
-  const numCells = 61;
+  const numCells = 81;
   let iteration = 0;
-
-  class Cell {
-
-    constructor(index, alive) {
-      this.index = index;
-      this.alive = alive;
-    }
-
-    getLeftState() {
-      if (this.index === 0) return false;
-      return cells[iteration][this.index - 1].alive;
-    }
-
-    getRightState() {
-      if (this.index === numCells - 1) return false;
-      return cells[iteration][this.index + 1].alive;
-    }
-
-    getThisOrRight() {
-      return this.alive || this.getRightState();
-    }
-
-    // Next state, based on [left_cell XOR (central_cell OR right_cell)]
-    evolve() {
-      this.alive = this.getLeftState() ? !this.getThisOrRight() : this.getThisOrRight();
-    }
-  }
 
   const cells = [[]];
 
   for (let x = 0; x<numCells; x++) {
-    const C = new Cell(x, x === Math.floor(numCells/2) ? true : false);
-    cells[iteration].push(C);
+    cells[iteration].push(x === Math.floor(numCells/2) ? 1 : 0);
   }
 
   const nextIteration = () => {
     // Copy current iteration to new array
-    let currentIterationCopy = cells[iteration].map(cell => new Cell(cell.index, cell.alive));
+    let currentIterationCopy = [...cells[iteration]];
     cells[iteration + 1] = evolveCells(currentIterationCopy);
-    console.log(cells);
     iteration++;
   }
 
   const evolveCells = (cellArray) => {
-    cellArray.forEach(cell => cell.evolve());
-    return cellArray;
+    return cellArray.map( (cell, index) => {
+      const left = index === 0 ? 0 : cells[iteration][index - 1];
+      const right = (index === numCells - 1) ? 0 : cells[iteration][index + 1];
+      // console.log(left, cell, right, left ^ (right | cell));
+
+      // [left_cell XOR (central_cell OR right_cell)]
+      return left ^ (right | cell)
+    } )
   }
 
   const handleCellClick = (i, x) => {
-    cells[i][x].alive = !cells[i][x].alive;
+    cells[i][x] = cells[i][x] === 0 ? 1 : 0;
     iteration = i;
   }
 </script>
@@ -71,8 +45,8 @@
 
 <svg viewbox={`0 0 ${numCells*10} ${iteration > numCells ? iteration*10 : numCells*10}`} width={1100} preserveAspectRatio="xMidYMid meet">
 {#each cells as generation, i}
-  {#each generation as cell}
-    <rect x={cell.index*10} y={i*10} width={10} height={10} opacity={iteration < i ? '0.6' : '1'} fill={cell.alive ? 'white' : 'black'} on:click={() => handleCellClick(i, cell.index)}/>
+  {#each generation as cell, num}
+    <rect x={num*10} y={i*10} width={10} height={10} opacity={iteration < i ? '0.6' : '1'} fill={cell ? 'white' : 'black'} on:click={() => handleCellClick(i, num)}/>
   {/each}
 {/each}
 </svg>
