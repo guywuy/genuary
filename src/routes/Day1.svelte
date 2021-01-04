@@ -1,50 +1,50 @@
 <script>
+  import { onMount } from "svelte";
 
-  const ran = () => Math.floor(Math.random() * 100);
-  const gen5Points = () => new Array(5).fill(0).map( v => v = [ran(), ran(), ran()]);
-  const gen100Points = () => new Array(100).fill(0).map( v => v = {x:ran(), y:ran(), z:ran()});
+  let canvas;
+  
+  onMount(() => {
+    const ctx = canvas.getContext("2d");
+    const spacer = 20;
+    
+    let frame = requestAnimationFrame(loop);
+    
+    function loop(t) {
+      let numX = canvas.width / spacer;
+      let numY = canvas.height / spacer;
+      frame = requestAnimationFrame(loop);
+      
+      // ctx.fillStyle = 'white';
+      // ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'tomato'
+      ctx.strokeStyle = 'rgba(0,0,0,0.01)'
+      const tMod = Math.floor(t / 100);
 
-  // const genCubedArray = () => {
-  //   let cube = [];
-  //   for (let x = 0; x < 10; x++) {
-  //     let arrX = [];
-  //     for (let y = 0; y < 10; y++) {
-  //       let arrY = [];
-  //       for (let z = 0; z < 10; z++) {
-  //         arrY.push(gen5Points());
-  //       }
-  //       arrX.push(arrY);
-  //     }
-  //     cube.push(arrX);
-  //   };
-  //   return cube;
-  // }
+      for(let x = 0; x<numX; x++) {
+        for(let y = 0; y<numY; y++) {
+          for(let z = 5; z>0; z--) {
+            // console.log(Math.cos(t));
+            ctx.fillStyle = `rgba(${255/5*z}, ${255*Math.sin(t*0.001)}, ${255*y/x/5}, 0.2)`
+            ctx.fillRect((x*spacer) + 2.5, (y*spacer) + 2.5, 2*z, 2*z);
+            ctx.beginPath();       // Start a new path
+            ctx.moveTo(x*spacer, y*spacer);    // Move the pen to origin
+            ctx.lineTo(x*(Math.sin(t*0.001))*spacer + 5, y*(Math.sin(t*0.001))*spacer);  // Draw a line
+            ctx.stroke();          // Render the path
+          };
+        };
+      };
+    }
 
-  // let cube = genCubedArray();
-
-  let array = gen100Points();
-//   console.log(array);
+    return () => {
+      cancelAnimationFrame(frame);
+    };
+  });
 </script>
 
 <style>
-  svg {
+  canvas {
     max-width: 100%;
     max-height: 100%;
-    /* perspective: 500px; */
-    /* transform-style: preserve-3d; */
-  }
-
-  svg ellipse {
-    /* transform-origin: 50% 50% 0px; */
   }
 </style>
-
-<svg viewbox="0 0 100 100" width={1000} height={1000} preserveAspectRatio="xMidYMid meet">
-{#each array as {x,y,z}, i}
-
-  <!-- <ellipse cx={x} cy={y} rx={10} ry={10} fill={`hsl(${360*z*.1}, 100%, 50%)`} transform={`scale(${z*0.01})`}/> -->
-  <ellipse cx={x} cy={y} rx={10} ry={10} fill={`hsl(${360*z*.1}, 100%, 50%)`}/>
-
-{/each}
-</svg>
-
+<canvas bind:this={canvas} width={400} height={400} />
