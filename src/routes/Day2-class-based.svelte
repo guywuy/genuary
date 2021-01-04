@@ -1,9 +1,6 @@
 <script>
   // https://en.wikipedia.org/wiki/Rule_30
 
-  // Rewrite to binary arrays instead of class objects, 1 for alive. Use bitwise operators to compare for next state.
-  // ^ XOR, | OR. 
-
   const numCells = 61;
   let iteration = 0;
 
