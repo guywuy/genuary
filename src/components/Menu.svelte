@@ -18,7 +18,11 @@
     },
     {
       route: "/3",
-      desc: "3 - Canvas lines towards mouse"
+      desc: "3 - Canvas moving lines"
+    },
+    {
+      route: "/4",
+      desc: "4 - Canvas lines towards mouse"
     },
   ];
 </script>
