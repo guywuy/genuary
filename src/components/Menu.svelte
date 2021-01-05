@@ -16,6 +16,10 @@
       route: "/2",
       desc: "2 - Rule 30"
     },
+    {
+      route: "/3",
+      desc: "3 - Canvas lines towards mouse"
+    },
   ];
 </script>
 

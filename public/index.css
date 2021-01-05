@@ -25,3 +25,11 @@ body {
 .mg-btm {
   margin-bottom: 1rem;
 }
+.page-title {
+  margin: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  filter: drop-shadow(2px 2px 0px yellow);
+  writing-mode: vertical-lr;
+}

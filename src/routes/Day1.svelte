@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
 
   let canvas;
-  
+
   onMount(() => {
     const ctx = canvas.getContext("2d");
     const spacer = 20;
@@ -47,4 +47,6 @@
     max-height: 100%;
   }
 </style>
+
+<h1 class="page-title">Triple nested loops</h1>
 <canvas bind:this={canvas} width={400} height={400} />

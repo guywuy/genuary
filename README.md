@@ -1,6 +1,6 @@
 # Genuary
 
-Loosely based on [genuary](https://genuary2021.github.io/prompts). To do some creative coding consistently.
+Loosely based on [genuary](https://genuary2021.github.io/prompts) and [codecember](https://codecember.ink/2020/1). To do some creative coding consistently.
 
 > ✨ Bootstrapped with Create Snowpack App (CSA).
 

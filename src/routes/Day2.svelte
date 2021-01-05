@@ -41,6 +41,8 @@
   }
 </style>
 
+<h1 class="page-title">Rule 30</h1>
+
 <button on:click={nextIteration} class="btn bg-white mg-btm">Next</button>
 
 <svg viewbox={`0 0 ${numCells*10} ${iteration > numCells ? iteration*10 : numCells*10}`} width={1100} preserveAspectRatio="xMidYMid meet">

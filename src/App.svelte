@@ -5,6 +5,7 @@
   import Home from './routes/Home.svelte';
   import Day1 from './routes/Day1.svelte';
   import Day2 from './routes/Day2.svelte';
+  import Day3 from './routes/Day3.svelte';
 
   let showMenu = false;
 
@@ -12,6 +13,7 @@
     '/': Home,
     '/1': Day1,
     '/2': Day2,
+    '/3': Day3,
   };
 
   const toggleMenu = () => showMenu = !showMenu;
