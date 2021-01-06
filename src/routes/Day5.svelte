@@ -1,5 +1,6 @@
 <script>
   import { onMount } from "svelte";
+  import { degToRad } from '../utils';
 
   let canvas;
 
@@ -16,7 +17,7 @@
     const numPoints = 20;
 
     function loop(t) {
-      let pointsToShow = t*0.001 % numPoints;
+      let pointsToShow = t*0.0025 % numPoints;
       frame = requestAnimationFrame(loop);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.strokeStyle = 'black';
@@ -25,11 +26,12 @@
       ctx.translate(half, half);
       
       ctx.beginPath();       // Start a new path
-      ctx.moveTo(-quarter, 0);    // Move the pen to origin
-      for( let x = 0; x <= pointsToShow; x++){
-        ctx.rotate(-Math.PI / x);
+      ctx.moveTo(quarter, 0);    // Move the pen to origin
+      for( let x = 1; x <= pointsToShow; x++){
+        ctx.rotate(degToRad(360 / (pointsToShow)));
         ctx.lineTo(quarter, 0);  // Draw a line
       }
+      ctx.closePath();
       ctx.stroke();          // Render the path
 
       ctx.translate(-half, -half);
