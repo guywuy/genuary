@@ -24,6 +24,10 @@
       route: "/4",
       desc: "4 - Canvas lines towards mouse"
     },
+    {
+      route: "/5",
+      desc: "5 - Line becomes circle"
+    },
   ];
 </script>
 
