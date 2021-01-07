@@ -28,6 +28,10 @@
       route: "/5",
       desc: "5 - Line becomes circle"
     },
+    {
+      route: "/6",
+      desc: "6 - Unknown pleasures"
+    },
   ];
 </script>
 

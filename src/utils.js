@@ -11,3 +11,6 @@ export const degToRad = (degrees) => {
 export const radToDeg = (rad) => {
     return rad / (Math.PI / 180);
 };
+
+// value, in_min, in_max, out_min, out_max
+export const map = (value, x1, y1, x2, y2) => (value - x1) * (y2 - x2) / (y1 - x1) + x2;
