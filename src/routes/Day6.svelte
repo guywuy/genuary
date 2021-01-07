@@ -12,53 +12,44 @@
     const { width, height } = canvas;
     const half = width/2;
 
-    const numLines = 26;
-    const spacer = (height - 60)/numLines;
-    
-    const numCurves = 12;
+    const numLines = 30;
+    const ySpacer = height/numLines;
+
+    const numCurves = 30;
     const xSpacer = width/numCurves;
 
-    // let start = width * 0.2; // Start wave 0.2 across
-    // let end = width * 0.8; // End with 0.2 to go
-    // let dx = (end - start) / numCurves; // Distance across for each wave to go
+    // Make array of points
+    const points = [];
+    for( let h = 0; h < numLines; h++){
+      let y = (h * ySpacer + 20);
+      points[h] = [];
+      for (let w = 0; w < numCurves; w++) {
+        let x = w * xSpacer;
+        let dFromCenter = map(Math.abs(x - half), half, 0, 0, 50);
+        let yRandom = y - (Math.random()*dFromCenter); // Change y value as random modified by distance from centre
+        points[h][w] = {x, y: yRandom}
+      }
+    }
 
     function draw(t) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.strokeStyle = 'black';
       ctx.lineWidth = 2;
 
-      const genCurve = (x, yPos) => {
-        // let xPos = start + (x*dx);
-          // let xPosEnd = start + ((x+1)*dx);
-          let xPos = (x * xSpacer);
-          let xPosEnd = ((x+1)*xSpacer);
-
-          // Modifier -> should be higher in the center. From 0 - 100
-          let dFromCenter = map(Math.abs(half - xPos), half, 0, 0, 100);
-
-          let yPosEnd = yPos - Math.random()*dFromCenter;
-
-          let c1x = (xPos + xPosEnd)/2;
-          let c1y = (yPos + yPosEnd)/2;
-          // ctx.lineTo(xPosEnd, yPosEnd);
-          return ctx.quadraticCurveTo(xPos, yPosEnd, c1x, c1y);
-          // ctx.quadraticCurveTo(c1x, c1y, xPosEnd, yPosEnd);
-      }
-
-      for( let y = 0; y <= numLines; y++){
-        let yPos = (y * spacer) + 50;
-
+      for( let h = 2; h < points.length; h++){
         ctx.beginPath();
-        ctx.moveTo(0, yPos);
+        ctx.moveTo(points[h][0].x, points[h][0].y);
 
-        for (let x = 0; x <= numCurves-2; x++) {
-          genCurve(x, yPos)
+        for( var w = 0; w < points[h].length-2; w++){
+          const {x, y} = points[h][w];
+          const cX = (x + points[h][w+1].x) / 2; // Half way between this point and next point
+          const cY = (y + points[h][w+1].y) / 2; // Half way between this point and next point
+          // ctx.lineTo(x, y);
+          ctx.quadraticCurveTo(x, y, cX, cY);
         }
+        ctx.quadraticCurveTo(points[h][w].x, points[h][w].y, points[h][w + 1].x, points[h][w + 1].y);
+        ctx.lineTo(width, points[h][w+1].y);
 
-        let penultimateX = numCurves - 1;
-
-        ctx.lineTo(penultimateX * xSpacer, yPos);
-        ctx.lineTo(width, yPos);
         ctx.save();
         ctx.globalCompositeOperation = 'destination-out'; // Control composite to hide lines underneath
         ctx.fill();
@@ -83,20 +74,9 @@
     max-height: 100%;
     border: 1px solid sandybrown;
   }
-  .lines {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: grid;
-    grid-template-columns: repeat(40, 1fr);
-    grid-template-rows: repeat(40, 1fr);
-  }
 </style>
 
 <h1 class="page-title">Unknown pleasures</h1>
 <div class="canvasWrap">
   <canvas bind:this={canvas} width={400} height={600} />
-  <div class="lines"></div>
 </div>
