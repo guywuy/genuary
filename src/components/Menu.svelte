@@ -32,6 +32,10 @@
       route: "/6",
       desc: "6 - Unknown pleasures"
     },
+    {
+      route: "/7",
+      desc: "7 - Peter de Jong Attractor"
+    },
   ];
 </script>
 
