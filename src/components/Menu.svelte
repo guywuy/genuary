@@ -36,6 +36,10 @@
       route: "/7",
       desc: "7 - Peter de Jong Attractor"
     },
+    {
+      route: "/8",
+      desc: "8 - Perlin Noise Fields"
+    },
   ];
 </script>
 
