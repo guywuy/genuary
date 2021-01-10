@@ -40,6 +40,10 @@
       route: "/8",
       desc: "8 - Perlin Noise Fields"
     },
+    {
+      route: "/9",
+      desc: "9 - Circle of arcs"
+    },
   ];
 </script>
 
