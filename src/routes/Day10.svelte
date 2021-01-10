@@ -13,7 +13,7 @@
     const { width, height } = canvas;
     const halfW = width/2;
     const halfH = height/2;
-    const spacer = 30;
+    const spacer = 20;
     const numDots = Math.min(width, height) / spacer;
 
 
@@ -26,20 +26,23 @@
 
     ctx.fillStyle = 'rgba(0, 0, 0, 1)';
 
-    const periodic = p => map(Math.sin(Math.PI*2*p), -1, 1, 2, 8);
+    const periodic = p => map(Math.cos(Math.PI*p), -1, 1, 0, 4);
 
-    const offset = (x, y) => 0.01 * dist(x*spacer, y*spacer, halfW, halfH);
+    const offset = (x, y) => 0.01 * dist(x, y, halfW, halfH);
+    const offset2 = (x, y) => 0.0005 * (x*x+2*y - y);
 
     function draw(t) {
       requestAnimationFrame(draw);
       ctx.clearRect(0, 0, width, height);
 
-      for (let x = 0; x <= numDots; x++ ) {
-        for (let y = 0; y <= numDots; y++ ) {
+      for (let x = 0; x <= width; x+=spacer ) {
+        for (let y = 0; y <= height; y+=spacer ) {
           ctx.beginPath();
-          let size = periodic(t * 0.001 - offset(x, y)); // Get size based on offset modulated by time
-          ctx.ellipse(x*spacer, y*spacer, size, size, 0, 0, 2*Math.PI);
-          ctx.fill();
+          let size = periodic(t * 0.001 - offset2(x, y)); // Get size based on offset modulated by time
+          let size2 = periodic(t * 0.001 - offset(x, y)); // Get size based on offset modulated by time
+          ctx.ellipse(x, y, size2*2 + 2, size, size, 0, 2*Math.PI);
+          ctx.strokeStyle = `rgba(${map(size2, 0, 10, 0, 255)}, 0, ${map(size, 0, 10, 0, 255)}, 1)`;
+          ctx.stroke();
         }
       }
     }
