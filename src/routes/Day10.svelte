@@ -1,6 +1,7 @@
 <script>
+
   import { onMount } from "svelte";
-  import { map, degToRad } from '../utils';
+  import { map } from '../utils';
 
   let canvas;
 
@@ -12,8 +13,8 @@
     const { width, height } = canvas;
     const halfW = width/2;
     const halfH = height/2;
-    const arcWidth = Math.min(width, height) / 40;
-    const spacer = 4;
+    const spacer = 30;
+    const numDots = Math.min(width, height) / spacer;
 
 
     // You basically need 3 things :
@@ -24,37 +25,24 @@
 
 
     ctx.fillStyle = 'rgba(0, 0, 0, 1)';
-    ctx.lineWidth = arcWidth;
-    ctx.lineCap = 'round';
 
-    const arcs = [];
-    for (let i = 0; i < 15; i++) {
-      arcs.push({
-        x: halfW,
-        y: halfH,
-        radius: (i * arcWidth) + (i * spacer),
-        startAngle: Math.random() * Math.PI * 2,
-        endAngle: Math.random() * Math.PI * 2,
-        clockwise: Math.random() > 0.5,
-        speed: Math.random() * 0.001,
-      })
+    const periodic = (context, time, x, y) => {
+      let dist = Math.abs(halfW - (x*spacer)) + Math.abs(halfH - (y*spacer));
+      let size = map(Math.sin(time * 0.00001 * dist), -1, 1, 0, 10);
+      return context.ellipse(x*spacer, y*spacer, size, size, 0, 0, 2*Math.PI);
     }
 
     function draw(t) {
       requestAnimationFrame(draw);
       ctx.clearRect(0, 0, width, height);
-      arcs.forEach((arc,i) => {
-        ctx.beginPath();
-        const {x, y, radius, startAngle, endAngle, clockwise, speed } = arc;
-        let sAngle = startAngle + (t * speed);
-        let eAngle = endAngle + (t * speed);
-        if (clockwise) {
-          sAngle *= -1;
-          eAngle *= -1;
+
+      for (let x = 0; x <= numDots; x++ ) {
+        for (let y = 0; y <= numDots; y++ ) {
+          ctx.beginPath();
+          periodic(ctx, t, x, y);
+          ctx.fill();
         }
-        ctx.arc(x, y, radius, sAngle , eAngle, clockwise);
-        ctx.stroke();
-      })
+      }
     }
 
     return () => {

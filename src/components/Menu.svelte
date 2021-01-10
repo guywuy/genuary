@@ -44,6 +44,10 @@
       route: "/9",
       desc: "9 - Circle of arcs"
     },
+    {
+      route: "/10",
+      desc: "10 - Time loops"
+    },
   ];
 </script>
 
