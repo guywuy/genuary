@@ -7,9 +7,13 @@ export const lerp = (start, end, t) => {
 export const degToRad = (degrees) => {
     return degrees * (Math.PI / 180);
   };
-  
+
 export const radToDeg = (rad) => {
     return rad / (Math.PI / 180);
+};
+
+export const dist = (x1, y1, x2, y2) => {
+    return Math.hypot(x2 - x1, y2 - y1);
 };
 
 // value, in_min, in_max, out_min, out_max

@@ -1,7 +1,7 @@
 <script>
 
   import { onMount } from "svelte";
-  import { map } from '../utils';
+  import { map, dist } from '../utils';
 
   let canvas;
 
@@ -26,11 +26,9 @@
 
     ctx.fillStyle = 'rgba(0, 0, 0, 1)';
 
-    const periodic = (context, time, x, y) => {
-      let dist = Math.abs(halfW - (x*spacer)) + Math.abs(halfH - (y*spacer));
-      let size = map(Math.sin(time * 0.00001 * dist), -1, 1, 0, 10);
-      return context.ellipse(x*spacer, y*spacer, size, size, 0, 0, 2*Math.PI);
-    }
+    const periodic = p => map(Math.sin(Math.PI*2*p), -1, 1, 2, 8);
+
+    const offset = (x, y) => 0.01 * dist(x*spacer, y*spacer, halfW, halfH);
 
     function draw(t) {
       requestAnimationFrame(draw);
@@ -39,7 +37,8 @@
       for (let x = 0; x <= numDots; x++ ) {
         for (let y = 0; y <= numDots; y++ ) {
           ctx.beginPath();
-          periodic(ctx, t, x, y);
+          let size = periodic(t * 0.001 - offset(x, y)); // Get size based on offset modulated by time
+          ctx.ellipse(x*spacer, y*spacer, size, size, 0, 0, 2*Math.PI);
           ctx.fill();
         }
       }
