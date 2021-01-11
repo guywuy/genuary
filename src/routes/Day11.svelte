@@ -1,9 +1,9 @@
 <script>
   import { onMount } from "svelte";
   import { map, degToRad } from '../utils';
-  // import SimplexNoise from 'simplex-noise';
+  import SimplexNoise from 'simplex-noise';
 
-  // let simplex = new SimplexNoise();
+  let simplex = new SimplexNoise();
   // console.log(simplex);
 
   let canvas;
@@ -26,8 +26,12 @@
       points[h] = [];
       for (let w = 0; w < num; w++) {
         let x = (w * spacer) + spacer/3;
-        x += map(Math.random(), 0, 1, -spacer/4, spacer/4);
-        y += map(Math.random(), 0, 1, -spacer/4, spacer/4);
+
+        const mod = simplex.noise2D(w, h);
+        x += map(mod, -1, 1, -spacer/4, spacer/4);
+        y += map(mod, -1, 1, -spacer/4, spacer/4);
+        // x += map(Math.random(), 0, 1, -spacer/4, spacer/4);
+        // y += map(Math.random(), 0, 1, -spacer/4, spacer/4);
         h%2 === 0 ? x += (spacer/2) : null;
         points[h][w] = {x, y}
       }
@@ -38,7 +42,6 @@
       ctx.fillStyle = 'rgba(0, 0, 0, 1)';
       for (let h = 0; h <= points.length - 1; h++) {
         for (let w = 0; w <= points[h].length - 1; w++) {
-          // const mod = simplex.noise2D(x, y);
 
           let {x, y} = points[h][w];
           
