@@ -8,6 +8,9 @@
 
   let canvas;
 
+  let updatePoints;
+  let useNoise = true;
+
   onMount(() => {
     const ctx = canvas.getContext("2d");
 
@@ -19,33 +22,42 @@
     const spacer = width/8;
     const num = width/spacer;
 
-    // Make array of points
-    const points = [];
-    for( let h = 0; h < num; h++){
-      let y = (h * spacer) + spacer/2;
-      points[h] = [];
-      for (let w = 0; w < num; w++) {
-        let x = (w * spacer) + spacer/3;
 
-        const mod = simplex.noise2D(w, h);
-        x += map(mod, -1, 1, -spacer/4, spacer/4);
-        y += map(mod, -1, 1, -spacer/4, spacer/4);
-        // x += map(Math.random(), 0, 1, -spacer/4, spacer/4);
-        // y += map(Math.random(), 0, 1, -spacer/4, spacer/4);
-        h%2 === 0 ? x += (spacer/2) : null;
-        points[h][w] = {x, y}
-      }
+    // Make array of points
+    updatePoints = () => {
+      useNoise = !useNoise;
+      requestAnimationFrame(draw)
     }
 
     function draw(t) {
-      // requestAnimationFrame(draw);
+
+      let points = []
+      for( let h = 0; h < num; h++){
+        let y = (h * spacer) + spacer/2;
+        points[h] = [];
+        for (let w = 0; w < num; w++) {
+          let x = (w * spacer) + spacer/3;
+
+          const mod = simplex.noise2D(w, h);
+          if (!useNoise) {
+            x += map(Math.random(), 0, 1, -spacer/4, spacer/4);
+            y += map(Math.random(), 0, 1, -spacer/4, spacer/4);
+          } else {
+            x += map(mod, -1, 1, -spacer/4, spacer/4);
+            y += map(mod, -1, 1, -spacer/4, spacer/4);
+          }
+          h%2 === 0 ? x += (spacer/2) : null;
+          points[h][w] = {x, y}
+        }
+      }
+
+      ctx.clearRect(0, 0, width, height)
       ctx.fillStyle = 'rgba(0, 0, 0, 1)';
       for (let h = 0; h <= points.length - 1; h++) {
         for (let w = 0; w <= points[h].length - 1; w++) {
 
           let {x, y} = points[h][w];
-          
-          // console.log(h, w);
+
           if (w !== points[h].length - 1 && h !== points.length - 1) {
             // this is not the last one across or down -> draw to right and below
             ctx.beginPath();
@@ -60,13 +72,11 @@
             ctx.stroke();
           }
           if (h !== 0 && w !== 0) {
-            console.log('inloop', points[h][w - 1], points[h-1][w]);
             // this is not the first one across or down -> draw to left and up
             ctx.beginPath();
             ctx.moveTo(x, y);
             let pointToLeft = points[h][w - 1];
             let pointAbove = points[h-1][w];
-            console.log({pointAbove});
             ctx.lineTo(pointToLeft.x, pointToLeft.y);
             ctx.lineTo(pointAbove.x, pointAbove.y);
             ctx.closePath();
@@ -98,5 +108,9 @@
 
 <h1 class="page-title">Triangular mesh</h1>
 <div class="canvasWrap">
+  <div>
+    Using - { useNoise ? 'Simplex noise' : 'Random points' }
+    <button on:click={updatePoints}>Change</button>
+  </div>
   <canvas bind:this={canvas} width={600} height={600} />
 </div>
