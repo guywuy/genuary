@@ -48,6 +48,10 @@
       route: "/10",
       desc: "10 - Time loops"
     },
+    {
+      route: "/11",
+      desc: "11 - Triangular mesh"
+    },
   ];
 </script>
 
