@@ -52,6 +52,10 @@
       route: "/11",
       desc: "11 - Triangular mesh"
     },
+    {
+      route: "/12",
+      desc: "12 - Game of Life"
+    },
   ];
 </script>
 
