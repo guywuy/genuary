@@ -28,6 +28,20 @@
       const cosT = Math.cos(t * 0.0001 * TAU) * 0.15
       const sinT = Math.sin(t * 0.0001 * TAU) * 0.15
 
+      ctx.save();
+      ctx.fillStyle = 'rgba(0,0,0,0)' //for transparent clipping
+      ctx.beginPath()
+      for(let i = 0; i < 6; i ++) {
+        const v = PVector.fromAngle(TAU / 6 * i - Math.PI/2).setMag(width/2 - 30)
+        ctx.lineTo(v.x + width/2, v.y + width/2)
+      }
+      ctx.closePath()
+      ctx.clip()
+
+      ctx.translate(width/2, height/2)
+      ctx.rotate(-Math.PI / 4)
+      ctx.translate(-width/2, -height/2)
+
       const N = 80
       for(let i = 0; i < N; i ++) {
         let y = map(i, 0, N - 1, -100, height + 100)
@@ -47,6 +61,8 @@
         ctx.closePath();
         ctx.fill();
       }
+
+      ctx.restore()
 
     }
 
