@@ -9,6 +9,7 @@
     "snowpack": "^2.18.4"
   },
   "dependencies": {
+    "pvectorjs": "^2.0.7",
     "simplex-noise": "^2.4.0",
     "svelte": "^3.31.0",
     "svelte-spa-router": "^3.1.0"

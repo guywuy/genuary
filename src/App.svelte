@@ -15,6 +15,7 @@
   import Day10 from './routes/Day10.svelte';
   import Day11 from './routes/Day11.svelte';
   import Day12 from './routes/Day12.svelte';
+  import Day13 from './routes/Day13.svelte';
 
   let showMenu = false;
 
@@ -32,6 +33,7 @@
     '/10': Day10,
     '/11': Day11,
     '/12': Day12,
+    '/13': Day13,
   };
 
   const toggleMenu = () => showMenu = !showMenu;

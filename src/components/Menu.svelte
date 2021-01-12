@@ -56,6 +56,10 @@
       route: "/12",
       desc: "12 - Game of Life"
     },
+    {
+      route: "/13",
+      desc: "13 - Wavy Hexagon"
+    },
   ];
 </script>
 
