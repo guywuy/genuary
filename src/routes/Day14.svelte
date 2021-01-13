@@ -19,7 +19,7 @@
       this.ruleY = "-WF++XF[+++YF++ZF]-";
       this.ruleZ = "--YF++++WF[+ZF++++XF]--XF";
 
-      this.startLength = 820;
+      this.startLength = 1020;
       this.theta = TAU / 10;
 
       this.complete = false;
@@ -96,6 +96,7 @@
           ctx.beginPath();
           ctx.moveTo(0, 0);
           ctx.lineTo(0, -this.drawLength);
+          ctx.strokeStyle = `rgba(${i%255}, 0, ${(i-125)%255}, 0.06)`;
           ctx.stroke();
           ctx.translate(0, -this.drawLength);
         }
