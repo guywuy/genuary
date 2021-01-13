@@ -60,6 +60,10 @@
       route: "/13",
       desc: "13 - Wavy Hexagon"
     },
+    {
+      route: "/14",
+      desc: "14 - Penrose L System"
+    },
   ];
 </script>
 
