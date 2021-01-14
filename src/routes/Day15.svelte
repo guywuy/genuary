@@ -2,8 +2,11 @@
 
   import { onMount } from "svelte";
   import { map, dist } from '../utils';
+  import SimplexNoise from 'simplex-noise';
 
   const threshold = 42;
+
+  const sNoise = new SimplexNoise();
 
   class Particle {
     constructor(x, y, speedX, speedY, rgb, angle = 0) {
@@ -27,20 +30,21 @@
       this.x = this.x + this.speedX;
       this.y = this.y + this.speedY;
 
+      // Bounce off walls
       if (this.x >= canvasWidth || this.x <= 0) this.speedX *= -1;
       if (this.y >= canvasHeight || this.y <= 0) this.speedY *= -1;
+
+      // Change speed slightly based on noise map of canvas
+      this.speedX += sNoise.noise2D(this.x, this.y) * 0.05;
+      this.speedY += sNoise.noise2D(this.x, this.y) * 0.05;
     }
 
     render(ctx, points) {
-      ctx.beginPath();
-      ctx.ellipse(this.x, this.y, 4, 4, 0, 0, Math.PI*2);
-      ctx.closePath();
-      ctx.strokeStyle = `rgba(${this.rgb}, 0.2)`;
-      ctx.fillStyle = `rgb(${this.rgb})`;
-      ctx.fill();
       // If within threshold of other point, draw line there...
       points.forEach(p => {
-        if (this.id !== p.id && dist(this.x, this.y, p.x, p.y) < threshold) {
+        let distanceAway = dist(this.x, this.y, p.x, p.y);
+        if (this.id !== p.id && distanceAway < threshold) {
+          ctx.strokeStyle = `rgba(${this.rgb}, ${map(distanceAway, threshold, 0, 0, 0.5)})`;
           ctx.beginPath();
           ctx.lineTo(this.x, this.y);
           ctx.lineTo(p.x, p.y);
@@ -48,6 +52,13 @@
           ctx.stroke();
         }
       })
+
+      // Draw point circle
+      ctx.beginPath();
+      ctx.ellipse(this.x, this.y, 3, 3, 0, 0, Math.PI*2);
+      ctx.closePath();
+      ctx.fillStyle = `rgb(${this.rgb})`;
+      ctx.fill();
     }
   }
 
@@ -59,7 +70,7 @@
     let frame = requestAnimationFrame(draw);
 
     const { width, height } = canvas;
-    const numParticles = 50;
+    const numParticles = 80;
 
 
     ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)';
