@@ -64,6 +64,10 @@
       route: "/14",
       desc: "14 - Penrose L System"
     },
+    {
+      route: "/15",
+      desc: "15 - Simple Particle System"
+    },
   ];
 </script>
 
