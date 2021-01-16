@@ -72,6 +72,10 @@
       route: "/16",
       desc: "16 - Simple Particle System - Taxicab Geometry"
     },
+    {
+      route: "/17",
+      desc: "17 - Particle Trails"
+    },
   ];
 </script>
 
