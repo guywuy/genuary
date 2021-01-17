@@ -5,6 +5,8 @@
   import SimplexNoise from 'simplex-noise';
 
   const threshold = 42;
+  let width=600;
+  let height=600;
 
   const sNoise = new SimplexNoise();
 
@@ -63,13 +65,13 @@
   }
 
   let canvas;
+  let wHeight;
 
   onMount(() => {
     const ctx = canvas.getContext("2d");
 
     let frame = requestAnimationFrame(draw);
 
-    const { width, height } = canvas;
     const numParticles = 80;
 
 
@@ -108,11 +110,12 @@
   canvas {
     max-width: 100%;
     max-height: 100%;
-    /* border: 1px solid sandybrown; */
   }
 </style>
 
+<svelte:window bind:innerWidth={width} bind:innerHeight={wHeight}/>
+
 <h1 class="page-title">Simple Particle System</h1>
 <div class="canvasWrap">
-  <canvas bind:this={canvas} width={600} height={600} />
+  <canvas bind:this={canvas} width={width} height={height} />
 </div>
