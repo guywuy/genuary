@@ -28,13 +28,13 @@
       }
     }
 
-    move(canvasWidth, canvasHeight) {
+    move() {
       this.x = this.x + this.speedX;
       this.y = this.y + this.speedY;
 
       // Bounce off walls
-      if (this.x >= canvasWidth || this.x <= 0) this.speedX *= -1;
-      if (this.y >= canvasHeight || this.y <= 0) this.speedY *= -1;
+      if (this.x >= width || this.x <= 0) this.speedX *= -1;
+      if (this.y >= height || this.y <= 0) this.speedY *= -1;
 
       // Change speed slightly based on noise map of canvas
       this.speedX += sNoise.noise2D(this.x, this.y) * 0.05;
@@ -91,7 +91,7 @@
       ctx.clearRect(0, 0, width, height);
 
       particles.forEach(p => {
-        p.move(width, height);
+        p.move();
         p.render(ctx, particles);
       })
     }
@@ -105,7 +105,8 @@
 
 <style>
   .canvasWrap {
-    position: relative;
+    position: absolute;
+    inset: 0;
   }
   canvas {
     max-width: 100%;
@@ -113,7 +114,7 @@
   }
 </style>
 
-<svelte:window bind:innerWidth={width} bind:innerHeight={wHeight}/>
+<svelte:window bind:innerWidth={width} bind:innerHeight={height}/>
 
 <h1 class="page-title">Simple Particle System</h1>
 <div class="canvasWrap">
