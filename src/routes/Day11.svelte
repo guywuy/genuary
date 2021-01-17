@@ -102,7 +102,7 @@
   canvas {
     max-width: 100%;
     max-height: 100%;
-    border: 1px solid sandybrown;
+    /* border: 1px solid sandybrown; */
   }
 </style>
 
@@ -110,7 +110,7 @@
 <div class="canvasWrap">
   <div>
     Using - { useNoise ? 'Simplex noise' : 'Random points' }
-    <button on:click={updatePoints}>Change</button>
+    <button on:click={updatePoints} class="btn">Change</button>
   </div>
   <canvas bind:this={canvas} width={600} height={600} />
 </div>

@@ -52,7 +52,7 @@
 
 <style>
   .app>main {
-    background: rgb(209, 209, 167);
+    background: rgb(216, 216, 216);
     margin: 1rem;
     padding: 1rem;
     min-height: calc(100vh - 2rem);
