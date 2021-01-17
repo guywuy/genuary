@@ -76,6 +76,10 @@
       route: "/17",
       desc: "17 - Particle Trails"
     },
+    {
+      route: "/18",
+      desc: "18 - Particle Waves"
+    },
   ];
 </script>
 

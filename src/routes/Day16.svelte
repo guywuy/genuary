@@ -110,7 +110,7 @@
   canvas {
     max-width: 100%;
     max-height: 100%;
-    border: 1px solid sandybrown;
+    /* border: 1px solid sandybrown; */
   }
 </style>
 
