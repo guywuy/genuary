@@ -88,20 +88,25 @@
     background: rgb(216, 216, 0);
     margin: 1rem;
     padding: 1rem;
-    min-height: calc(100vh - 2rem);
+    height: calc(100vh - 2rem);
     font-size: 1.2rem;
     font-weight: light;
     display: grid;
-    place-content: center;
+    align-content: center;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
   }
+  nav {
+    height: 100%;
+    overflow: auto;
+  }
   ol {
     list-style: none;
     padding: 0;
     margin: 0;
+    columns: 300px 2;
   }
   li {
     margin-bottom: 1rem;
