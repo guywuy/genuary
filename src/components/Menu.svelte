@@ -80,6 +80,10 @@
       route: "/18",
       desc: "18 - Particle Waves"
     },
+    {
+      route: "/19",
+      desc: "19 - Frozen Brush - Delaunay Triangles"
+    },
   ];
 </script>
 
