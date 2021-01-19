@@ -60,7 +60,6 @@
   }
 
   function forEachTriangleEdge(points, delaunay, callback) {
-    console.log(points);
     for (let e = 0; e < delaunay.triangles.length; e++) {
         if (e > delaunay.halfedges[e]) {
             const p = points[delaunay.triangles[e]];
@@ -75,15 +74,13 @@
 
     let frame = requestAnimationFrame(loop);
 
-    for (let i = 0; i < 20; i++) {
-      createParticle();
-    }
+    // for (let i = 0; i < 20; i++) {
+    //   createParticle();
+    // }
 
     function loop(t) {
-      // frame = requestAnimationFrame(loop);
+      frame = requestAnimationFrame(loop);
       ctx.clearRect(0, 0, width, height);
-
-      if (t%100 == 0) createParticle();
 
       if (particles.length === 0) return;
 
@@ -95,7 +92,6 @@
       delaunay = Delaunator.from(particles.map(p => p.getPosArray()));
 
       forEachTriangleEdge(particles.map(p => p.getPosArray()), delaunay, (e, p, q) => {
-        console.log(delaunay);
         ctx.beginPath();
         ctx.moveTo(p[0], p[1]);
         ctx.lineTo(q[0], q[1]);
@@ -107,6 +103,11 @@
       cancelAnimationFrame(frame);
     };
   });
+
+  const updateMousePos = e => {
+    const {offsetX, offsetY} = e;
+    particles.push(new Particle(uuidv4(), offsetX, offsetY, 200));
+  }
 </script>
 
 <style>
@@ -117,4 +118,4 @@
 </style>
 
 <h1 class="page-title">Frozen Brush - Delaunay Triangles</h1>
-<canvas bind:this={canvas} width={width} height={height} />
+<canvas bind:this={canvas} width={width} height={height} on:mousemove={updateMousePos} />
