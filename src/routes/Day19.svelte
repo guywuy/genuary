@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import { v4 as uuidv4 } from 'uuid';
   import Delaunator from 'delaunator';
+  import { map } from '../utils';
 
   let canvas;
   let mouseX;
@@ -18,6 +19,8 @@
       this.x = x;
       this.y = y;
       this.lifetime = lifetime;
+      this.speedX = (Math.random() - 0.5) * 2;
+      this.speedY = (Math.random() - 0.5) * 2;
     }
 
     getPos() {
@@ -33,6 +36,10 @@
 
     update() {
       this.lifetime = this.lifetime - 1;
+
+      this.x += this.speedX;
+      this.y += this.speedY;
+
       if (this.lifetime === 0) {
         console.log('removing');
         removeParticle(this.id);
@@ -92,6 +99,7 @@
       delaunay = Delaunator.from(particles.map(p => p.getPosArray()));
 
       forEachTriangleEdge(particles.map(p => p.getPosArray()), delaunay, (e, p, q) => {
+        ctx.strokeStyle = `rgba(${map(p[0], 0, width, 0, 255)}, ${map(p[1], 0, height, 0, 255)}, 0, 0.6)`
         ctx.beginPath();
         ctx.moveTo(p[0], p[1]);
         ctx.lineTo(q[0], q[1]);
@@ -106,7 +114,7 @@
 
   const updateMousePos = e => {
     const {offsetX, offsetY} = e;
-    particles.push(new Particle(uuidv4(), offsetX, offsetY, 200));
+    particles.push(new Particle(uuidv4(), offsetX + Math.random()*30, offsetY + Math.random()* 30, 70));
   }
 </script>
 
@@ -114,6 +122,7 @@
   canvas {
     max-width: 100%;
     max-height: 100%;
+    border: 1px solid royalblue;
   }
 </style>
 
