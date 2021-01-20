@@ -41,7 +41,7 @@
       this.y += this.speedY;
 
       if (this.lifetime === 0) {
-        console.log('removing');
+        // console.log('removing');
         removeParticle(this.id);
       }
     }
@@ -127,4 +127,5 @@
 </style>
 
 <h1 class="page-title">Frozen Brush - Delaunay Triangles</h1>
+<p>Move the mouse over the canvas</p>
 <canvas bind:this={canvas} width={width} height={height} on:mousemove={updateMousePos} />

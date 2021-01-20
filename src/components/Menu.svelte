@@ -84,6 +84,10 @@
       route: "/19",
       desc: "19 - Frozen Brush - Delaunay Triangles"
     },
+    {
+      route: "/20",
+      desc: "20 - Negative Space Illusion"
+    },
   ];
 </script>
 
