@@ -88,6 +88,50 @@
       route: "/20",
       desc: "20 - Negative Space Illusion"
     },
+    {
+      route: "/21",
+      desc: "21 - Negative Space Illusion 2"
+    },
+    // {
+    //   route: "/22",
+    //   desc: "22 - "
+    // },
+    // {
+    //   route: "/23",
+    //   desc: "23 - "
+    // },
+    // {
+    //   route: "/24",
+    //   desc: "24 - "
+    // },
+    // {
+    //   route: "/25",
+    //   desc: "25 - "
+    // },
+    // {
+    //   route: "/26",
+    //   desc: "26 - "
+    // },
+    // {
+    //   route: "/27",
+    //   desc: "27 - "
+    // },
+    // {
+    //   route: "/28",
+    //   desc: "28 - "
+    // },
+    // {
+    //   route: "/29",
+    //   desc: "29 - "
+    // },
+    // {
+    //   route: "/30",
+    //   desc: "30 - "
+    // },
+    // {
+    //   route: "/31",
+    //   desc: "31 - "
+    // },
   ];
 </script>
 

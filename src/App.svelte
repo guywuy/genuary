@@ -23,6 +23,17 @@
   import Day18 from './routes/Day18.svelte';
   import Day19 from './routes/Day19.svelte';
   import Day20 from './routes/Day20.svelte';
+  import Day21 from './routes/Day21.svelte';
+  // import Day22 from './routes/Day22.svelte';
+  // import Day23 from './routes/Day23.svelte';
+  // import Day24 from './routes/Day24.svelte';
+  // import Day25 from './routes/Day25.svelte';
+  // import Day26 from './routes/Day26.svelte';
+  // import Day27 from './routes/Day27.svelte';
+  // import Day28 from './routes/Day28.svelte';
+  // import Day29 from './routes/Day29.svelte';
+  // import Day30 from './routes/Day30.svelte';
+  // import Day31 from './routes/Day31.svelte';
 
   let showMenu = false;
 
@@ -48,6 +59,17 @@
     '/18': Day18,
     '/19': Day19,
     '/20': Day20,
+    '/21': Day21,
+    // '/22': Day22,
+    // '/23': Day23,
+    // '/24': Day24,
+    // '/25': Day25,
+    // '/26': Day26,
+    // '/27': Day27,
+    // '/28': Day28,
+    // '/29': Day29,
+    // '/30': Day30,
+    // '/31': Day31,
   };
 
   const toggleMenu = () => showMenu = !showMenu;
