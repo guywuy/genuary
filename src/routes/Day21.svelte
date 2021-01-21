@@ -48,10 +48,10 @@
 
       const halfSpacer = spacer/2;
 
-      let step = TAU / duration * time;
+      let step = TAU / duration * time * 2;
       let sinMod = Math.sin(step);
 
-      const timeMap = map(time, 0, duration, halfSpacer, spacer*2) * sinMod; // Extent that the control point should 'bend' the quadratic curve
+      const timeMap = map(time, 0, duration, halfSpacer, spacer*3) * sinMod; // Extent that the control point should 'bend' the quadratic curve
 
       let offset = map(time, 0, duration, 0, -spacer * 4); // Move slowly up and left
 
@@ -90,7 +90,7 @@
 
       if (time === duration/4) {
         time = 0;
-        odd = !odd;
+        // odd = !odd;
       }
     }
 
