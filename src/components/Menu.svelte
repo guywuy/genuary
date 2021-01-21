@@ -92,10 +92,10 @@
       route: "/21",
       desc: "21 - Negative Space Illusion 2"
     },
-    // {
-    //   route: "/22",
-    //   desc: "22 - "
-    // },
+    {
+      route: "/22",
+      desc: "22 - Negative Space Combination"
+    },
     // {
     //   route: "/23",
     //   desc: "23 - "
