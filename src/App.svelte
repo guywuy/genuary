@@ -25,7 +25,7 @@
   import Day20 from './routes/Day20.svelte';
   import Day21 from './routes/Day21.svelte';
   import Day22 from './routes/Day22.svelte';
-  // import Day23 from './routes/Day23.svelte';
+  import Day23 from './routes/Day23.svelte';
   // import Day24 from './routes/Day24.svelte';
   // import Day25 from './routes/Day25.svelte';
   // import Day26 from './routes/Day26.svelte';
@@ -61,7 +61,7 @@
     '/20': Day20,
     '/21': Day21,
     '/22': Day22,
-    // '/23': Day23,
+    '/23': Day23,
     // '/24': Day24,
     // '/25': Day25,
     // '/26': Day26,
