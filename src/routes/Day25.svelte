@@ -52,15 +52,15 @@
 
         let n = sNoise.noise2D(x * noiseMod, y * noiseMod)
 
-        ctx.save();
-        ctx.translate(x, y);
+        // ctx.save();
+        // ctx.translate(x, y);
         ctx.beginPath();
-        ctx.ellipse(0, 0, map(delta, 0, threshold, 3, 1), map(Math.abs(n), 0, 1, 1, 8), 0, 0, TAU);
+        ctx.ellipse(x, y, map(delta, 0, threshold, 3, 1), map(Math.abs(n), 0, 1, 1, 8), 0, 0, TAU);
         ctx.fillStyle = `rgb(${map(Math.abs(n), 0, 1, 0, 255)}, 0, 0)`
         ctx.fill();
         ctx.stroke();
-        ctx.translate(-x, -y);
-        ctx.restore();
+        // ctx.translate(-x, -y);
+        // ctx.restore();
 
         // Update x and y based on noise
         s.x += Math.sin(n * TAU)
