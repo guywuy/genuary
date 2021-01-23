@@ -1,7 +1,7 @@
 <script>
 
   import { onMount } from "svelte";
-  import { map, setupCanvas } from '../utils';
+  import { map, setupCanvas, dist } from '../utils';
   import SimplexNoise from 'simplex-noise';
 
   // https://avinayak.github.io/art/2021/01/09/noise-planets.html
@@ -13,15 +13,15 @@
   let canvas;
   let width = 600;
   let height = 600;
-  let duration = 600;
-
+  let threshold = 200;
+  const noiseMod = 0.05;
 
   onMount(() => {
     const ctx = setupCanvas(canvas);
 
     let frame = requestAnimationFrame(draw);
 
-    const numPoints = 100;
+    const numPoints = 2000;
 
 
     const points = [...Array(numPoints)].map(_ => {
@@ -40,21 +40,20 @@
 
       const drawPoint = s => {
         let {x, y} = s;
-        let deltaX = Math.abs((width/2 - (x)));
-        let deltaY = Math.abs((height/2 - (y)));
-        let delta = map(deltaX + deltaY, 0, width, 6, 1);
+        let delta = dist(width/2, height/2, x, y);
+        if (delta > threshold) return;
 
         ctx.save();
         ctx.translate(x, y);
         ctx.beginPath();
-        ctx.ellipse(0, 0, delta, delta, 0, 0, TAU);
+        ctx.ellipse(0, 0, 1, 1, 0, 0, TAU);
         ctx.fill();
-        ctx.stroke();
+        // ctx.stroke();
         ctx.translate(-x, -y);
         ctx.restore();
 
         // Update x and y based on noise
-        let n = sNoise.noise2D(x, y)
+        let n = sNoise.noise2D(x * noiseMod, y * noiseMod)
         s.x += Math.sin(n * TAU)
         s.y += Math.cos(n * TAU)
       }
