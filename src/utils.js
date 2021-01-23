@@ -38,3 +38,9 @@ export function setupCanvas(canvas) {
     ctx.scale(dpr, dpr);
     return ctx;
 }
+
+// Return a random integer or float between min and max
+export function roll(min, max, floatFlag) {
+    let r = Math.random() * (max - min) + min
+    return floatFlag ? r : Math.floor(r)
+}

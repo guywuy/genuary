@@ -98,23 +98,23 @@
     },
     {
       route: "/23",
-      desc: "23 - ?"
+      desc: "23 - Noisey Worms"
+    },
+    {
+      route: "/24",
+      desc: "24 - Noise Planets"
+    },
+    {
+      route: "/25",
+      desc: "25 - L System"
     },
     // {
-    //   route: "/24",
-    //   desc: "24 - "
-    // },
-    // {
-    //   route: "/25",
-    //   desc: "25 - "
-    // },
-    // {
     //   route: "/26",
-    //   desc: "26 - "
+    //   desc: "26 - Genuary prompts ?"
     // },
     // {
     //   route: "/27",
-    //   desc: "27 - "
+    //   desc: "27 - SVG shapes?"
     // },
     // {
     //   route: "/28",
