@@ -102,11 +102,11 @@
     },
     {
       route: "/24",
-      desc: "24 - Noise Planets"
+      desc: "24 - Noise Planet"
     },
     {
       route: "/25",
-      desc: "25 - L System"
+      desc: "25 - Noise Planet 2"
     },
     // {
     //   route: "/26",
