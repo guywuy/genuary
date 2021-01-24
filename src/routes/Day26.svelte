@@ -1,5 +1,4 @@
 <script>
-
   import { onMount } from "svelte";
   import { map, setupCanvas, dist } from '../utils';
 
@@ -17,14 +16,14 @@
 
     let frame = requestAnimationFrame(draw);
 
-    const spacer = 80;
+    const spacer = 60;
     const numSquares = Math.min(width, height) / spacer;
 
 
     const whites = [];
     const blacks = [];
-    for (let x = -1; x <= numSquares; x+=2 ) {
-      for (let y = -1; y <= (numSquares * 2) + 1; y++ ) {
+    for (let x = -1; x <= numSquares + 1; x+=2 ) {
+      for (let y = -2; y <= (numSquares * 2) + 1; y++ ) {
         let h = x * spacer;
         let v = y * spacer/2;
         if ( y % 2 === 0 ) {
@@ -37,6 +36,8 @@
       }
     }
 
+    let numberInRow = (numSquares + 2) * 2;
+
     function draw(t) {
       requestAnimationFrame(draw);
       ctx.clearRect(0, 0, width, height);
@@ -47,16 +48,20 @@
       let sinMod = Math.sin(step);
 
       let offset = map(time, 0, duration, 0, -spacer * 4); // Move slowly up and left
-      // let offset = sinMod * spacer;
-
+      
       let bendAmount = sinMod * spacer;
-
-      const drawSquare = s => {
+      
+      const drawSquare = (s, i) => {
         ctx.save();
-        let midX = s[0] + halfSpacer;
-        let midY = s[1] + halfSpacer;
+        let midX = s[0] + halfSpacer + offset;
+        let midY = s[1] + halfSpacer + offset;
 
-        ctx.translate(midX + offset, midY + offset);
+        // If in odd column, move up else move down over time
+        i % 2 == 0 ? midY += sinMod * spacer : midY -= sinMod * spacer;
+        // If in odd row, move up else move down over time
+        (i % numberInRow) / 2 % 2 == 0 ? midX += sinMod * spacer : midX -= sinMod * spacer;
+
+        ctx.translate(midX, midY);
         // Draw triangle
         ctx.beginPath();
         ctx.moveTo(0, -halfSpacer); // Top left
@@ -74,10 +79,9 @@
         ctx.moveTo(0, -halfSpacer); // Top left
         ctx.quadraticCurveTo(bendAmount, 0, 0, halfSpacer); // Bottom Left
         ctx.quadraticCurveTo(-bendAmount, 0, 0, -halfSpacer); // Top left
-        ctx.fillStyle = 'rgb(122, 122, 122)';
         ctx.fillStyle = `rgb(${sinMod * 225}, ${sinMod * 225}, ${sinMod * 225})`;
         ctx.fill();
-        ctx.translate(-midX + offset, -midY + offset);
+        ctx.translate(-midX, -midY);
         ctx.restore();
       }
 
@@ -118,7 +122,7 @@
   }
 </style>
 
-<h1 class="page-title">Negative Space Triangles Cones</h1>
+<h1 class="page-title">Moving Triangles and Cones</h1>
 <div class="canvasWrap">
   <canvas bind:this={canvas} width={width} height={height} />
 </div>
