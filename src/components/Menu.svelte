@@ -108,10 +108,10 @@
       route: "/25",
       desc: "25 - Noise Planet 2"
     },
-    // {
-    //   route: "/26",
-    //   desc: "26 - Genuary prompts ?"
-    // },
+    {
+      route: "/26",
+      desc: "26 - Negative Space Triangles Cones"
+    },
     // {
     //   route: "/27",
     //   desc: "27 - SVG shapes?"
