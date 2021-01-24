@@ -112,10 +112,10 @@
       route: "/26",
       desc: "26 - Negative Space Triangles Cones"
     },
-    // {
-    //   route: "/27",
-    //   desc: "27 - SVG shapes?"
-    // },
+    {
+      route: "/27",
+      desc: "27 - SVG shapes"
+    },
     // {
     //   route: "/28",
     //   desc: "28 - "

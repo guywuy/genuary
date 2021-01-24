@@ -44,3 +44,8 @@ export function roll(min, max, floatFlag) {
     let r = Math.random() * (max - min) + min
     return floatFlag ? r : Math.floor(r)
 }
+
+// Return random rgba string
+export function randomRGBA() {
+    return `rgba(${roll(0, 255)}, ${roll(0, 255)}, ${roll(0, 255)}, ${Math.random()})`;
+}
