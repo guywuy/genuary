@@ -17,16 +17,16 @@
 
     let frame = requestAnimationFrame(draw);
 
-    const spacer = 60;
+    const spacer = 80;
     const numSquares = Math.min(width, height) / spacer;
 
 
     const whites = [];
     const blacks = [];
     for (let x = -1; x <= numSquares; x+=2 ) {
-      for (let y = -1; y <= numSquares; y++ ) {
+      for (let y = -1; y <= (numSquares * 2) + 1; y++ ) {
         let h = x * spacer;
-        let v = y * spacer;
+        let v = y * spacer/2;
         if ( y % 2 === 0 ) {
           whites.push([h + spacer, v]);
           blacks.push([h, v]);
@@ -59,40 +59,37 @@
         ctx.translate(midX + offset, midY + offset);
         // Draw triangle
         ctx.beginPath();
-        ctx.moveTo(0, -spacer); // Top left
+        ctx.moveTo(0, -halfSpacer); // Top left
 
         odd ? 
           ctx.lineTo(spacer * sinMod, 0) :
           ctx.lineTo(-spacer * sinMod, 0);
-        ctx.lineTo(0, spacer);
+        ctx.lineTo(0, halfSpacer);
 
         ctx.fillStyle = odd ? 'white' : 'black';
         ctx.fill();
 
         // Draw Circle curve
         ctx.beginPath();
-        ctx.moveTo(0, -spacer); // Top left
-        ctx.quadraticCurveTo(bendAmount, 0, 0, spacer); // Bottom Left
-        ctx.quadraticCurveTo(-bendAmount, 0, 0, -spacer); // Top left
+        ctx.moveTo(0, -halfSpacer); // Top left
+        ctx.quadraticCurveTo(bendAmount, 0, 0, halfSpacer); // Bottom Left
+        ctx.quadraticCurveTo(-bendAmount, 0, 0, -halfSpacer); // Top left
         ctx.fillStyle = 'rgb(122, 122, 122)';
+        ctx.fillStyle = `rgb(${sinMod * 225}, ${sinMod * 225}, ${sinMod * 225})`;
         ctx.fill();
         ctx.translate(-midX + offset, -midY + offset);
         ctx.restore();
       }
 
       if (odd) {
-        ctx.fillStyle = 'black';
+        ctx.fillStyle = `rgba(20, 20, 20, ${sinMod})`;
         ctx.fillRect(0, 0, width, height);
 
-        ctx.strokeStyle = 'black';
-        ctx.fillStyle = 'white';
         whites.forEach(drawSquare)
       } else {
-        ctx.fillStyle = 'white';
+        ctx.fillStyle = `rgba(40, 40, 40, ${sinMod})`;
         ctx.fillRect(0, 0, width, height);
 
-        ctx.strokeStyle = 'white';
-        ctx.fillStyle = 'black';
         blacks.forEach(drawSquare)
       }
 
