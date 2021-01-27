@@ -60,3 +60,13 @@ input[type=range]::-moz-range-track {
   height: 4px;
   cursor: pointer;
 }
+
+
+@keyframes draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}

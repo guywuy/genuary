@@ -49,3 +49,8 @@ export function roll(min, max, floatFlag) {
 export function randomRGBA() {
     return `rgba(${roll(0, 255)}, ${roll(0, 255)}, ${roll(0, 255)}, ${Math.random().toFixed(2)})`;
 }
+
+// Return random rgb string
+export function randomRGB() {
+    return `rgba(${roll(0, 255)}, ${roll(0, 255)}, ${roll(0, 255)})`;
+}

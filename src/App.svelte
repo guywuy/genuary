@@ -30,7 +30,7 @@
   import Day25 from './routes/Day25.svelte';
   import Day26 from './routes/Day26.svelte';
   import Day27 from './routes/Day27.svelte';
-  // import Day28 from './routes/Day28.svelte';
+  import Day28 from './routes/Day28.svelte';
   // import Day29 from './routes/Day29.svelte';
   // import Day30 from './routes/Day30.svelte';
   // import Day31 from './routes/Day31.svelte';
@@ -66,7 +66,7 @@
     '/25': Day25,
     '/26': Day26,
     '/27': Day27,
-    // '/28': Day28,
+    '/28': Day28,
     // '/29': Day29,
     // '/30': Day30,
     // '/31': Day31,

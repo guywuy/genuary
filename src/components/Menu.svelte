@@ -114,12 +114,12 @@
     },
     {
       route: "/27",
-      desc: "27 - SVG shapes"
+      desc: "27 - SVG Shapes"
     },
-    // {
-    //   route: "/28",
-    //   desc: "28 - "
-    // },
+    {
+      route: "/28",
+      desc: "28 - SVG Path Generation"
+    },
     // {
     //   route: "/29",
     //   desc: "29 - "
