@@ -47,5 +47,5 @@ export function roll(min, max, floatFlag) {
 
 // Return random rgba string
 export function randomRGBA() {
-    return `rgba(${roll(0, 255)}, ${roll(0, 255)}, ${roll(0, 255)}, ${Math.random()})`;
+    return `rgba(${roll(0, 255)}, ${roll(0, 255)}, ${roll(0, 255)}, ${Math.random().toFixed(2)})`;
 }

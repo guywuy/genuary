@@ -1,8 +1,9 @@
 <script>
-  import { roll, map, randomRGBA } from '../utils.js';
+  import { roll, randomRGBA } from '../utils.js';
 
   let width = 100; 
   let height = 100;
+  let shapes = '';
 
   const options = [
     'rect',
@@ -25,8 +26,8 @@
     },
     circle() {
       let r = roll(0, 50);
-      let x = roll(0, width - (r/2));
-      let y = roll(0, height - (r/2));
+      let x = roll(0, width - (r/3));
+      let y = roll(0, height - (r/3));
       return `<circle cx="${x}" cy="${y}" r="${r}" ${generate.attributes()} />`
     },
     line() {
@@ -45,7 +46,7 @@
       return `<polyline points="${points.join(' ')}" ${generate.attributes()} />`
     },
     attributes() {
-      return `fill="${randomRGBA()}" stroke-width="${roll(1, 4)}" stroke="${randomRGBA()}"`;
+      return `fill="${randomRGBA()}" stroke-width="${roll(1, 4)}" stroke="${randomRGBA()}" stroke-linecap="${Math.random() > 0.5 ? 'round' : 'square'}"`;
     }
   }
 
@@ -56,6 +57,7 @@
     }).join('');
   }
 
+  shapes = generateShapes();
 </script>
 
 <style>
@@ -67,6 +69,7 @@
 
 <h1 class="page-title">SVG Shapes</h1>
 
+<button on:click={() => shapes = generateShapes()} class="btn bg-white mg-btm">Regenerate</button>
 <svg viewbox={`0 0 ${width} ${height}`} width={1000} preserveAspectRatio="xMidYMid meet">
-  {@html generateShapes()}
+  {@html shapes}
 </svg>

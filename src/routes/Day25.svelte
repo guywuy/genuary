@@ -18,7 +18,7 @@
   const noiseMod = 0.0025;
 
   onMount(() => {
-    const ctx = setupCanvas(canvas);
+    const ctx = canvas.getContext("2d");
 
     let frame = requestAnimationFrame(draw);
 
@@ -52,15 +52,11 @@
 
         let n = sNoise.noise2D(x * noiseMod, y * noiseMod)
 
-        // ctx.save();
-        // ctx.translate(x, y);
         ctx.beginPath();
         ctx.ellipse(x, y, map(delta, 0, threshold, 3, 1), map(Math.abs(n), 0, 1, 1, 8), 0, 0, TAU);
         ctx.fillStyle = `rgb(${map(Math.abs(n), 0, 1, 0, 255)}, 0, 0)`
         ctx.fill();
         ctx.stroke();
-        // ctx.translate(-x, -y);
-        // ctx.restore();
 
         // Update x and y based on noise
         s.x += Math.sin(n * TAU)
