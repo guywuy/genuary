@@ -120,13 +120,13 @@
       route: "/28",
       desc: "28 - SVG Path Generation"
     },
-    // {
-    //   route: "/29",
-    //   desc: "29 - "
-    // },
+    {
+      route: "/29",
+      desc: "29 - Greyscale Gradient - no lines",
+    },
     // {
     //   route: "/30",
-    //   desc: "30 - "
+    //   desc: "30 - Space Explorer"
     // },
     // {
     //   route: "/31",
