@@ -122,7 +122,7 @@
     },
     {
       route: "/29",
-      desc: "29 - Greyscale Gradient - no lines",
+      desc: "29 - Greyscale Gradients",
     },
     // {
     //   route: "/30",
