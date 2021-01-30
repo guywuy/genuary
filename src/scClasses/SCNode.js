@@ -15,9 +15,9 @@ export default class SCNode {
 
   drawNode() {
     this.ctx.fillStyle = this.parent ? "black" : "orange";
-    this.ctx.beginPath();
-    this.ctx.ellipse(this.position.x, this.position.y, 1, 1, 0, 0, Math.PI * 2);
-    this.ctx.fill();
+    // this.ctx.beginPath();
+    // this.ctx.ellipse(this.position.x, this.position.y, 1, 1, 0, 0, Math.PI * 2);
+    // this.ctx.fill();
 
     this.drawNodeLinks();
   }

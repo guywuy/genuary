@@ -2,6 +2,7 @@ export default class SCAttractor {
     constructor(position, ctx) {
         this.position = position;
         this.ctx = ctx;
+        this.reached = false;
         this.influencingNodes = [];
     }
 

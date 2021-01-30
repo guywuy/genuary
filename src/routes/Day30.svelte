@@ -59,10 +59,11 @@
     let frame = requestAnimationFrame(draw);
 
     function draw(t) {
-      if (network.getNumberAttractors() > 4000) {
+      if (network.getNumberNodes() < 1300) {
         requestAnimationFrame(draw);
       } else {
         console.log('finished');
+        console.log(network.getNumberAttractors());
       }
 
       ctx.clearRect(0, 0, width, height);
@@ -71,7 +72,7 @@
     }
 
     placeSeed = (e) => {
-      // addNodeToNetwork(e.target.clientX, e.target.clientY);
+      addNodeToNetwork(e.offsetX, e.offsetY);
     }
 
     return () => {

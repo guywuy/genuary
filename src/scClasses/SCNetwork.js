@@ -92,6 +92,10 @@ export default class SCNetwork {
   }
 
   getNumberAttractors() {
-    return this.attractors.length;
+    return this.attractors.filter( a => !a.reached).length;
+  }
+
+  getNumberNodes() {
+    return this.nodes.length;
   }
 }
