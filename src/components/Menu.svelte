@@ -124,10 +124,10 @@
       route: "/29",
       desc: "29 - Greyscale Gradients",
     },
-    // {
-    //   route: "/30",
-    //   desc: "30 - Space Explorer"
-    // },
+    {
+      route: "/30",
+      desc: "30 - Space Explorer"
+    },
     // {
     //   route: "/31",
     //   desc: "31 - "
