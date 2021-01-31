@@ -1,7 +1,6 @@
 <script>
 
   import { onMount } from "svelte";
-  import { map, dist } from '../utils';
   import PVector from 'pvectorjs';
   import SCAttractor from '../scClasses/SCAttractor';
   import SCNode from '../scClasses/SCNode';
@@ -24,8 +23,8 @@
   const TAU = Math.PI * 2;
 
   let canvas;
-  let width = 400;
-  let height = 400;
+  let width = 600;
+  let height = 600;
   const numAttractors = 5000;
   let placeSeed;
 
@@ -41,16 +40,16 @@
     }
 
 
-    // Initialise network with no node
-    const network = new SCNetwork(genAttractors(), [], ctx);
+    // Initialise network with no node or attractors
+    const network = new SCNetwork([], [], ctx);
 
+    network.attractors = genAttractors();
 
     const addNodeToNetwork = (x, y) => {
       network.addNode(new SCNode(null, new PVector(x, y), true, ctx))
     }
 
     addNodeToNetwork(width/2, height/2);
-    addNodeToNetwork(Math.random() * width, Math.random() * height);
 
     ctx.lineWidth = 1;
     ctx.strokeStyle = 'black';
@@ -59,7 +58,7 @@
     let frame = requestAnimationFrame(draw);
 
     function draw(t) {
-      if (network.getNumberNodes() < 1300) {
+      if (network.getNumberAttractors() > 1800) {
         requestAnimationFrame(draw);
       } else {
         console.log('finished');
@@ -93,7 +92,7 @@
   }
 </style>
 
-<h1 class="page-title">Space Explorer</h1>
+<h1 class="page-title">Space Explorer 1</h1>
 
 <div class="canvasWrap">
   <canvas bind:this={canvas} width={width} height={height} on:click={placeSeed}/>

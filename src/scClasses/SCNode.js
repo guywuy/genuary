@@ -1,13 +1,9 @@
-// import PVector from 'pvectorjs';
-import settings from "./settings";
-
 export default class SCNode {
   constructor(parent, position, isTip, ctx) {
     this.parent = parent;
     this.position = position;
     this.isTip = isTip;
     this.ctx = ctx;
-    this.settings = settings;
     this.childNodes = [];
 
     this.influencers = [];

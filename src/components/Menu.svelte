@@ -126,7 +126,7 @@
     },
     {
       route: "/30",
-      desc: "30 - Space Explorer"
+      desc: "30 - Space Explorer 1"
     },
     // {
     //   route: "/31",
