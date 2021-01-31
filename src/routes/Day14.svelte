@@ -1,9 +1,10 @@
 <script>
   import { onMount } from "svelte";
+  import Info from "../components/Info.svelte";
 
   // https://codecember.ink/2020/12
 
-  // L System. Start with an axiom, 
+  // L System. Start with an axiom,
   // rules to change the axiom string every iteration,
   // and a way of turning the finished string into lines
 
@@ -47,23 +48,23 @@
     // Build up the production string
     iterate(prod) {
       let newProduction = prod
-      .split('')
-      .map( c => {
-        // Substitute character in string for rule if applicable
-        if (c === 'W') {
-          return this.ruleW
-        } else if (c === 'X') {
-          return this.ruleX
-        } else if (c === 'Y') {
-          return this.ruleY
-        } else if (c === 'Z') {
-          return this.ruleZ
-        } else if (c !== 'F') {
-            return c
-        }
-      })
-      .join('');
-      this.generations ++;
+        .split("")
+        .map((c) => {
+          // Substitute character in string for rule if applicable
+          if (c === "W") {
+            return this.ruleW;
+          } else if (c === "X") {
+            return this.ruleX;
+          } else if (c === "Y") {
+            return this.ruleY;
+          } else if (c === "Z") {
+            return this.ruleZ;
+          } else if (c !== "F") {
+            return c;
+          }
+        })
+        .join("");
+      this.generations++;
       this.drawLength = this.drawLength * 0.5;
       this.production = newProduction;
     }
@@ -81,22 +82,22 @@
       for (let i = 0; i < this.steps; ++i) {
         const c = this.production.charAt(i);
 
-        if (c === '[') {
+        if (c === "[") {
           // Next drawing state
           ctx.save();
-        } else if (c === ']') {
+        } else if (c === "]") {
           // Restore last drawing state
           ctx.restore();
-        } else if (c === '+') {
+        } else if (c === "+") {
           ctx.rotate(this.theta);
-        } else if (c === '-') {
+        } else if (c === "-") {
           ctx.rotate(-this.theta);
-        } else if (c === 'F') {
+        } else if (c === "F") {
           // Draw a line and move there
           ctx.beginPath();
           ctx.moveTo(0, 0);
           ctx.lineTo(0, -this.drawLength);
-          ctx.strokeStyle = `rgba(${i%255}, 0, ${(i-125)%255}, 0.06)`;
+          ctx.strokeStyle = `rgba(${i % 255}, 0, ${(i - 125) % 255}, 0.06)`;
           ctx.stroke();
           ctx.translate(0, -this.drawLength);
         }
@@ -109,8 +110,8 @@
   onMount(() => {
     const ctx = canvas.getContext("2d");
     const { width, height } = canvas;
-    const halfW = width/2;
-    const halfH = height/2;
+    const halfW = width / 2;
+    const halfH = height / 2;
 
     const pen = new PenroseLSystem();
     pen.simulate(6); // 6 Iterations of string substitution
@@ -128,8 +129,19 @@
       cancelAnimationFrame(frame);
     };
   });
-
 </script>
+
+<h1 class="page-title">Penrose L System</h1>
+<div class="canvasWrap">
+  <canvas bind:this={canvas} width={500} height={500} />
+</div>
+
+<Info>
+  <h2>Penrose L System</h2>
+  <p>Start with an <strong>axiom</strong>,</p>
+  <p><strong>rules</strong> to change the axiom string every iteration,</p>
+  <p>and a <strong>way of turning</strong> the finished string into lines</p>
+</Info>
 
 <style>
   .canvasWrap {
@@ -141,8 +153,3 @@
     border: 1px solid sandybrown;
   }
 </style>
-
-<h1 class="page-title">Penrose L System</h1>
-<div class="canvasWrap">
-  <canvas bind:this={canvas} width={500} height={500} />
-</div>

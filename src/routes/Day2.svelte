@@ -1,4 +1,5 @@
 <script>
+  import Info from '../components/Info.svelte';
   // https://en.wikipedia.org/wiki/Rule_30
 
   const numCells = 81;
@@ -52,3 +53,8 @@
   {/each}
 {/each}
 </svg>
+
+<Info>
+  <h2>Wolfram's Cellular Automata, Rule 30</h2>
+  <a href="https://en.wikipedia.org/wiki/Rule_30" target="_blank">Wikipedia link</a>.
+</Info>

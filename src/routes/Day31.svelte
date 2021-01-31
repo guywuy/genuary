@@ -6,6 +6,7 @@
   import SCNode from '../scClasses/SCNode';
   import SCNetwork from '../scClasses/SCNetwork';
   import { map, randomRGB } from "../utils";
+  import Info from '../components/Info.svelte';
 
   let canvas;
   let width = 680;
@@ -108,10 +109,35 @@
 <h1 class="page-title">Space Explorer 2</h1>
 
 <div class="canvasWrap">
-  <p>Left click: Add Node</p>
-  <p>Enter: Display/Hide All Attractors</p>
-  <p>Mousemove: Generate Attractors around cursor</p>
-  <p>Space: Remove all Nodes</p>
-  <p>BackSpace: Remove all Attractors</p>
   <canvas bind:this={canvas} width={width} height={height} on:click={handleClick} on:mousemove={handleMousemove} />
+  <p><strong>Left click:</strong> Add Node</p>
+  <p><strong>Enter:</strong> Display/Hide All Attractors</p>
+  <p><strong>Mousemove:</strong> Generate Attractors around cursor</p>
+  <p><strong>Space:</strong> Remove all Nodes</p>
+  <p><strong>BackSpace:</strong> Remove all Attractors</p>
+  <p><strong>r:</strong> Regenerate random Attractors</p>
 </div>
+
+
+<Info>
+  <h3>Space Colonisation Algorithm</h3>
+  <p>
+    This is based on <a
+      href="https://medium.com/@jason.webb/space-colonization-algorithm-in-javascript-6f683b743dc5"
+      >a write up on medium</a
+    > by Jason Webb. I could and should improve it, for example by adding quadtree
+    so we don't have to loop over every node each frame.
+  </p>
+  <p>
+    Attractors are focal points of natural resources that promote growth.
+    Exactly which resources these represent will depend on the specific
+    branching system you want to model — auxin for leaves, sunlight for tree
+    branches, nutrient concentrations for sea fans and corals, etc.
+  </p>
+
+  <p>
+    Nodes are the points through which lines are drawn to render branches. More
+    nodes mean more fidelity, but poorer performance.
+  </p>
+</Info>
+

@@ -142,13 +142,14 @@
     padding: 1rem;
     height: calc(100vh - 2rem);
     font-size: 1.2rem;
-    font-weight: light;
+    font-weight: 200;
     display: grid;
     align-content: center;
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: calc(100% - 2rem);
+    z-index: 3;
   }
   nav {
     height: 100%;
@@ -163,6 +164,13 @@
   li {
     margin-bottom: 1rem;
   }
+
+  .githublink {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    font-weight: bold;
+  }
 </style>
 
 <section class="page" id="nav">
@@ -175,4 +183,5 @@
       {/each}
     </ol>
   </nav>
+  <a href="https://github.com/guywuy/genuary" class="githublink">GITHUB</a>
 </section>

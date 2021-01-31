@@ -4,7 +4,6 @@
   import SimplexNoise from 'simplex-noise';
 
   let simplex = new SimplexNoise();
-  // console.log(simplex);
 
   let canvas;
 
@@ -17,8 +16,6 @@
     let frame = requestAnimationFrame(draw);
 
     const { width, height } = canvas;
-    const halfW = width/2;
-    const halfH = height/2;
     const spacer = width/8;
     const num = width/spacer;
 
@@ -38,7 +35,7 @@
         for (let w = 0; w < num; w++) {
           let x = (w * spacer) + spacer/3;
 
-          const mod = simplex.noise2D(w, h);
+          const mod = simplex.noise2D(w * 0.1, h * 0.1);
           if (!useNoise) {
             x += map(Math.random(), 0, 1, -spacer/4, spacer/4);
             y += map(Math.random(), 0, 1, -spacer/4, spacer/4);
