@@ -128,10 +128,10 @@
       route: "/30",
       desc: "30 - Space Explorer 1"
     },
-    // {
-    //   route: "/31",
-    //   desc: "31 - "
-    // },
+    {
+      route: "/31",
+      desc: "31 - Space Explorer 2"
+    },
   ];
 </script>
 

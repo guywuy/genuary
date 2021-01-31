@@ -52,7 +52,7 @@ export function randomRGBA() {
 
 // Return random rgb string
 export function randomRGB() {
-    return `rgba(${roll(0, 255)}, ${roll(0, 255)}, ${roll(0, 255)})`;
+    return `rgb(${roll(0, 255)}, ${roll(0, 255)}, ${roll(0, 255)})`;
 }
 
 // Normal distribution - https://stackoverflow.com/questions/25582882/javascript-math-random-normal-distribution-gaussian-bell-curve

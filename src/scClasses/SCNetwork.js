@@ -12,7 +12,9 @@ export default class SCNetwork {
   }
 
   draw() {
-    this.attractors.forEach((a) => a.drawAttractor());
+    if (this.settings.showAttractorDots) {
+      this.attractors.forEach((a) => a.drawAttractor());
+    }
     this.nodes.forEach((n) => {
       n.drawNode();
       n.drawNodeLinks();
@@ -25,7 +27,11 @@ export default class SCNetwork {
 
   // Return a normalised vector - the average of all influencing attractor positions
   getAverageDirection(node, influencers) {
-    influencers.forEach((i) => i.drawAttractor("yellow"));
+
+    if (this.settings.showInfluencingAttractorDots) {
+      influencers.forEach((i) => i.drawAttractor("yellow"));
+    }
+
     let influencerVectors = influencers.map((i) => i.position.clone());
 
     let totalVec = influencerVectors.reduce((acc, curr) => {
@@ -64,6 +70,9 @@ export default class SCNetwork {
   }
 
   grow() {
+
+    if (this.attractors.length < 40) return;
+
     // Associate attractors with nearby nodes to figure out where growth should occur
     this.attractors.forEach((attractor) => {
       let closestNode = this.getClosestNode(attractor, this.nodes);
@@ -81,7 +90,9 @@ export default class SCNetwork {
           this.attractors.find((a) => a.id === id)
         );
 
-        nodesAttractors.forEach((i) => i.drawAttractor("rgba(255, 0, 0, 0.2)", 6));
+        if (this.settings.showInfluencingAttractorRings) {
+          nodesAttractors.forEach((i) => i.drawAttractor("rgba(255, 0, 0, 0.2)", 6));
+        }
 
         let averageDirection = this.getAverageDirection(node, nodesAttractors);
 
