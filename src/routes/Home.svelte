@@ -16,7 +16,7 @@
     <Photo src={imageUrl} />
 </section>
 
-<Info>
+<Info title="About">
     <h2>31 Generative Art sketches</h2>
     <p>Every day in January, making a sketch using code. Mostly following prompts from [<a href="https://codecember.ink/2020/1/">Codecember</a>] and [<a href="https://genuary2021.github.io/prompts">Genuary</a>].</p>
     <p>The sketches probably won't run well on mobile, and might be CPU intensive, sorry.</p>

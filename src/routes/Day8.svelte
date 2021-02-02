@@ -1,12 +1,12 @@
 <script>
   import { onMount } from "svelte";
-  import { map, degToRad } from '../utils';
   import SimplexNoise from 'simplex-noise';
 
   let simplex = new SimplexNoise();
-  // console.log(simplex);
 
   let canvas;
+  let noiseMod = 0.05;
+  let redraw;
 
   onMount(() => {
     const ctx = canvas.getContext("2d");
@@ -14,29 +14,28 @@
     let frame = requestAnimationFrame(draw);
 
     const { width, height } = canvas;
-    const halfW = width/2;
-    const halfH = height/2;
     const spacer = width/30;
 
 
     function draw(t) {
-      // requestAnimationFrame(draw);
+      requestAnimationFrame(draw);
+      ctx.clearRect(0, 0, width, height);
       ctx.fillStyle = 'rgba(0, 0, 0, 1)';
-      for (let x = 0; x <= width; x+=spacer) {
-        for (let y = 0; y <= width; y+=spacer) {
-          const mod = simplex.noise2D(x, y);
+      for (let x = 0; x <= width/spacer; x++) {
+        for (let y = 0; y <= width/spacer; y++) {
+          const mod = simplex.noise2D(x * noiseMod, y * noiseMod);
           ctx.save();
-          ctx.translate(x, y);
+          ctx.translate(x*spacer, y*spacer);
 
-          ctx.rotate(degToRad(360 * mod));
+          ctx.rotate(Math.PI * 2 * mod);
           const posMod = mod + 1;
           ctx.fillRect(-2, -2, 4, 4);
           ctx.beginPath();
           ctx.moveTo(-2, 0);
-          ctx.lineTo(15, 0);
+          ctx.lineTo(15 * (mod * 1.5), 0);
           ctx.stroke();
 
-          ctx.translate(-x, -y);
+          ctx.translate(-x*spacer, -y*spacer);
           ctx.restore();
         }
       }
@@ -46,6 +45,7 @@
       cancelAnimationFrame(frame);
     };
   });
+
 
 </script>
 
@@ -63,4 +63,8 @@
 <h1 class="page-title">Perlin Noise Fields</h1>
 <div class="canvasWrap">
   <canvas bind:this={canvas} width={600} height={600} />
+  <div class="controls">
+    <label for="scale">Scale</label>
+    <input type="range" name="scale" min="0.0005" max="0.15" step="0.0005" bind:value={noiseMod}>
+  </div>
 </div>

@@ -13,11 +13,10 @@
       let numX = canvas.width / spacer;
       let numY = canvas.height / spacer;
       frame = requestAnimationFrame(loop);
-      
-      // ctx.fillStyle = 'white';
-      // ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = 'tomato'
-      ctx.strokeStyle = 'rgba(0,0,0,0.01)'
+      ctx.strokeStyle = 'rgba(0,0,0,0.05)'
       const tMod = Math.floor(t / 100);
 
       for(let x = 0; x<numX; x++) {
@@ -28,7 +27,7 @@
             ctx.fillRect((x*spacer) + 2.5, (y*spacer) + 2.5, 2*z, 2*z);
             ctx.beginPath();       // Start a new path
             ctx.moveTo(x*spacer, y*spacer);    // Move the pen to origin
-            ctx.lineTo(x*(Math.sin(t*0.001))*spacer + 5, y*(Math.sin(t*0.001))*spacer);  // Draw a line
+            ctx.lineTo(z*(Math.cos(t*0.001))*spacer + 5, y*(Math.tan(t*0.0001))*spacer);  // Draw a line
             ctx.stroke();          // Render the path
           };
         };

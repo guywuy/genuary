@@ -1,4 +1,5 @@
 <script>
+  export let title;
   let open = false;
 
 </script>
@@ -34,7 +35,7 @@
   }
 </style>
 
-<button on:click={() => open = !open} class="btn bg-white">Info</button>
+<button on:click={() => open = !open} class="btn bg-white">{title ?? 'Info'}</button>
 {#if open}
 <section class="page">
   <div class="content">
