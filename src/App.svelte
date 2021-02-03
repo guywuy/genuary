@@ -83,7 +83,7 @@
     padding: 1rem;
     min-height: calc(100vh - 2rem);
     display: grid;
-    place-content: center;
+    place-items: center;
     position: relative;
   }
   .menu-button {

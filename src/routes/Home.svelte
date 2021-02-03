@@ -1,19 +1,45 @@
 <script>
     import Info from '../components/Info.svelte';
-    import Photo from '../components/Photo.svelte';
-    import imageUrl from '../img/metro-steps_1000.jpg';
+    import Thumb from '../components/Thumb.svelte';
+    let nums = [...Array(31)].map( (_, i) => i + 1);
 </script>
 
 <style>
+    h1 {
+        color: var(--primary);
+        text-decoration: underline;
+        text-decoration-style: wavy;
+        text-underline-offset: 0.5rem;
+        letter-spacing: 0.1rem;
+        margin-bottom: 3rem;
+    }
     .home {
-        display: grid;
-        place-content: center;
+        text-align: center;
+        width: 100%;
         max-width: 80vw;
+    }
+    .thumbs {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat( auto-fit, 250px );
+        list-style: none;
+        justify-content: center;
+        gap: 0.5rem;
     }
 </style>
 
 <section class="home">
-    <Photo src={imageUrl} />
+    <h1>31 Small Creative Code sketches</h1>
+    <ul class="thumbs">
+        {#each nums as num}
+        <li class="thumb">
+            <Thumb num={num} />
+        </li>
+        {/each}
+    </ul>
+    <!-- <Photo src={imageUrl} /> -->
 </section>
 
 <Info title="About">
